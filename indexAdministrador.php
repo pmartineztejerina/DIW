@@ -57,14 +57,20 @@ if (!isset($_SESSION['EMAIL'])){
             </div>
             <div class="row people">
                 <div class="col-md-3 col-lg-3 item mx-auto">
-                    <div class="box"><img class="rounded-circle" src="$_SESSION['FILE]" >
+                    <div class="box">
+                        <img class="rounded-circle" src="<?php if (isset($_SESSION['profileImage'])) {
+                          echo 'uploads/'.$_SESSION['profileImage'];
+                        } else{echo '/assets/img/1.jpg';} ?>" >
+                        <a href="#" onclick="fileUpload()" method="post">
+                          <img class="rounded-circle" src="/assets//img/edit.png" width="50" height="50">
+                        </a>
                     </div>
                 </div>
             </div>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+            <form action="upload.php" method="post">
             <h2 class="visually-hidden">Login Form</h2>
             <div class="illustration">
-            <input class="form-control" type="file" name="fileToUpload" id="fileToUpload" placeholder="Seleccione archivo" ></div>
+            <input class="form-control" onchange="loadFile(event)" type="file" name="imageUpload" id="fileUpload" placeholder="Seleccione archivo" ></div>
             <div class="mb-3"></div>
             <div class="mb-3"></div>
             <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Guardar cambios</button></div>
@@ -73,57 +79,3 @@ if (!isset($_SESSION['EMAIL'])){
     </section>
 </body>
 </html>
-<?php
-
-include 'conexion.php';
-
-//codigo upload
-$target_dir = "uploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-  if($check !== false) {
-    echo "File is an image - " . $check["mime"] . ".";
-    $uploadOk = 1;
-  } else {
-    echo "File is not an image.";
-    $uploadOk = 0;
-  }
-}
-
-// Check if file already exists
-if (file_exists($target_file)) {
-  echo "Sorry, file already exists.";
-  $uploadOk = 0;
-}
-
-// Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
-  echo "Sorry, your file is too large.";
-  $uploadOk = 0;
-}
-
-// Allow certain file formats
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" ) {
-  echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-  $uploadOk = 0;
-}
-
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-  echo "Sorry, your file was not uploaded.";
-// if everything is ok, try to upload file
-} else {
-  if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-    echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-    header("Location: indexAdministrador.php");
-  } else {
-    echo "Sorry, there was an error uploading your file.";
-  }
-}
-?>
