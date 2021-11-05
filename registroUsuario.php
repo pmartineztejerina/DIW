@@ -118,7 +118,7 @@ session_start();
       $_SESSION['BIRTHDAY']=$BIRTHDAY;
       
       
-      header("Location: login.php");
+      header("Location: index.php");
     } else {
 
       $HASH_PASSWORD = password_hash($PASSWORD, PASSWORD_DEFAULT);
@@ -131,7 +131,11 @@ session_start();
         $_SESSION['EMAIL'] = $EMAIL;
         $_SESSION['PASSWORD'] = $PASSWORD;
 
-        header("Location: login.php");
+        $url = "login.php";
+        header("Location: " . $url);
+        exit();
+
+        //header("Location: login.php");
 
       /* $sql = "SELECT Usuario_id FROM usuarios WHERE Usuario_email = '$EMAIL'";
 
@@ -168,7 +172,7 @@ session_start();
         mail($to,$subject,$message);  */
        
       } else {
-        echo "Error al dar de alta al usuario: " . "<br>" . mysqli_error($con);
+        echo "Error al dar de alta al usuario: " . "<br>" . mysqli_error($conn);
       }
       mysqli_close($conn);
     }

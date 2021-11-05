@@ -1,9 +1,14 @@
 <?php
+session_start();
+if (!isset($_SESSION['EMAIL'])) {
+  $_SESSION['EMAIL'] = "";
+  $_SESSION['user_id']="";
+}
 
 //codigo upload
-$target_dir = "uploads/";
-$target_file = $target_dir . basename($_FILES["imageUpload"]['name']);
-$extension=end(explode(".",$target_file));
+$target_file = "uploads/".basename($_FILES['imageUpload']['name']);
+$punto=".";
+$extension=end(explode($punto,$target_file));
 $newFilename=$_SESSION['user_id'].".".$extension;
 $uploadOk = 0;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -46,9 +51,13 @@ if ($uploadOk == 0) {
 } else {
   if (move_uploaded_file($_FILES['imageUpload']['tmp_name'], "uploads/".$newFilename)) {
     include 'conexion.php';
-    $EMAILSESSION=$_SESSION['session_email']; 
+    $EMAILSESSION=$_SESSION['EMAIL']; 
     $sql= "UPDATE usuarios SET Usuario_fotografia='$newFilename' WHERE Usuario_email='$EMAILSESSION'";
-    $conn->query($sql);
+    if (mysqli_query($conn, $sql)) {      
+      echo "Foto subida a la bbdd";
+    } else {
+      echo "La foto no se ha subido a la bbdd";
+    }
 
   } else {
     echo "Sorry, there was an error uploading your file.";

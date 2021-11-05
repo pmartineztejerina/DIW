@@ -128,6 +128,11 @@ if ($ENCUENTRAERROR == 1) {
               echo "no ha añadido la ultima conexion";
 
             } else {
+              //administrador
+              $_SESSION["EMAIL"] = $row['Usuario_email'];
+              $_SESSION['PERFIL'] = "admin";
+              $_SESSION['user_id'] = $row['Usuario_id'];
+              $_SESSION['profile_image'] = $row['Usuario_fotografia'];
               $url = "indexAdministrador.php";
               header("Location: " . $url);
               exit();
@@ -136,7 +141,9 @@ if ($ENCUENTRAERROR == 1) {
             //usuario
             $_SESSION["EMAIL"] = $row['Usuario_email'];
             $_SESSION['PERFIL'] = "usuario";
-            $url = "usuario.php";
+            $_SESSION['user_id'] = $row['Usuario_id'];
+            $_SESSION['profile_image'] = $row['Usuario_fotografia'];
+            $url = "indexUsuario.php";
             header("Location: " . $url);
             exit();
           }

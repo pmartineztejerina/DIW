@@ -29,7 +29,7 @@ if (!isset($_SESSION['EMAIL'])){
             <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="indexAdministrador.php">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="perfilAdmin.php">Perfil</a></li>
                     <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Administracion </a>
                         <div class="dropdown-menu">
@@ -53,7 +53,7 @@ if (!isset($_SESSION['EMAIL'])){
         </div>
     </nav>
         <div class="container">       
-        <form action="compruebaUsuario.php" method="post">
+            <form action="compruebaUsuario.php" method="post">
             <h2 class="visually-hidden">Login Form</h2>
             <div class="illustration">
                 <input class="form-control" type="text" name="NOMBRE" placeholder="Nombre" required>
@@ -65,12 +65,11 @@ if (!isset($_SESSION['EMAIL'])){
                 <input class="form-control" type="text" name="PROVINCIA" placeholder="Provincia" required>
                 <input class="form-control" type="text" name="NIF" placeholder="NIF" required>
                 <input class="form-control" type="text" name="TELEFONO" placeholder="Telefono" required>
-                <input class="form-control" type="date" name="BIRTHDAY" placeholder="Fecha de nacimiento" value="<?php echo $_SESSION['BIRTHDAY']; ?>" required></div>
-                <input class="form-control" type="file" name="FILE" placeholder="Seleccione imagen a subir" value="<?php echo $_SESSION['FILE']; ?>" ></div>
-            <div class="mb-3"></div>
-            <div class="mb-3"></div>
+                <input class="form-control" type="date" name="BIRTHDAY" placeholder="Fecha de nacimiento" value="<?php echo $_SESSION['BIRTHDAY']; ?>" required />
+            </div>
+            
             <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Guardar cambios</button></div>
-        </form>
+            </form>
         </div>
     </section>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
