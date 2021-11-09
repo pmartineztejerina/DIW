@@ -36,9 +36,9 @@ if (!isset($_SESSION['EMAIL'])){
                             <a class="dropdown-item" href="#">Añadir usuario</a>
                             <a class="dropdown-item" href="#">Borrar usuario</a>
                             <a class="dropdown-item" href="#">Modificar usuario</a>
-                            <a class="dropdown-item" href="#">Desbloquear usuario</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Localizacion</a>
+                            <a class="dropdown-item" href="#">Consulta usuarios</a>
+                            <!-- <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Localizacion</a> -->
                         </div>
                     </li>
                     <li class="nav-item">

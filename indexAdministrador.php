@@ -49,9 +49,9 @@ if (!isset($_SESSION['EMAIL'])) {
                                 <a class="dropdown-item" href="#">Añadir usuario</a>
                                 <a class="dropdown-item" href="#">Borrar usuario</a>
                                 <a class="dropdown-item" href="#">Modificar usuario</a>
-                                <a class="dropdown-item" href="#">Desbloquear usuario</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Localizacion</a>
+                                <a class="dropdown-item" href="#">Consulta usuarios</a>
+                               <!--  <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Localizacion</a> -->
                             </div>
                         </li>
                         <li class="nav-item">
@@ -75,6 +75,7 @@ if (!isset($_SESSION['EMAIL'])) {
             </div>
             <div class="mb-3 upload_form">
                 <form action="upload.php" method="post" enctype="multipart/form-data">
+                    <?php $_SESSION['URL']="indexAdministrador.php";  ?>
                     <h2 class="visually-hidden">Login Form</h2>
                     <div class="illustration">
                         <input class="form-control" type="file" name="imageUpload" id="fileUpload" placeholder="Seleccione archivo">

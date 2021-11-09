@@ -117,7 +117,7 @@ session_start();
 
       $_SESSION['BIRTHDAY']=$BIRTHDAY;
       
-      
+      include 'desconexion.php'; 
       header("Location: index.php");
     } else {
 
@@ -131,6 +131,7 @@ session_start();
         $_SESSION['EMAIL'] = $EMAIL;
         $_SESSION['PASSWORD'] = $PASSWORD;
 
+        include 'desconexion.php';
         $url = "login.php";
         header("Location: " . $url);
         exit();
@@ -173,8 +174,9 @@ session_start();
        
       } else {
         echo "Error al dar de alta al usuario: " . "<br>" . mysqli_error($conn);
+        include 'desconexion.php';
       }
-      mysqli_close($conn);
+      
     }
   }
   

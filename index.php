@@ -1,10 +1,9 @@
 <?php 
 session_start();
-if (!isset($_SESSION['EMAIL'])){
-    $_SESSION['EMAIL'] = "";
+    $_SESSION['EMAIL']="";
     $_SESSION['EMAILEXISTE']="visibility: hidden";
     $_SESSION['BIRTHDAY']="";
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

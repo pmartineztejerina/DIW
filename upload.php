@@ -3,6 +3,7 @@ session_start();
 if (!isset($_SESSION['EMAIL'])) {
   $_SESSION['EMAIL'] = "";
   $_SESSION['user_id']="";
+  $_SESSION['URL']="";
 }
 
 //codigo upload
@@ -55,8 +56,17 @@ if ($uploadOk == 0) {
     $sql= "UPDATE usuarios SET Usuario_fotografia='$newFilename' WHERE Usuario_email='$EMAILSESSION'";
     if (mysqli_query($conn, $sql)) {      
       echo "Foto subida a la bbdd";
+      include 'desconexion.php';
+      $url = $_SESSION['URL'];
+      Header('Location: '.$url);
+      Exit(); 
+
     } else {
       echo "La foto no se ha subido a la bbdd";
+      include 'desconexion.php';
+      $url = $_SESSION['URL'];
+      Header('Location: '.$url);
+      Exit(); 
     }
 
   } else {

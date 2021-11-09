@@ -1,7 +1,10 @@
 <?php
+session_start();
+$_SESSION['EMAIL'] = "";
+
     $ENCUENTRAERROR=0; 
-     $NOMBREERR = $APELLIDO_1ERR = $APELLIDO_2ERR = $DOMICILIOERR = $POBLACIONERR = $PROVINCIAERR = $NIFERR = $TELEFONOERR  ="";
-     $NOMBRE = $APELLIDO_1 = $APELLIDO_2 = $DOMICILIO = $POBLACION = $PROVINCIA = $NIF = $TELEFONO = $FOTO ="";
+     $NOMBREERR = $APELLIDO1ERR = $APELLIDO2ERR = $EMAILERR= $DOMICILIOERR = $POBLACIONERR = $PROVINCIAERR = $NIFERR = $TELEFONOERR  ="";
+     $NOMBRE = $APELLIDO1 = $APELLIDO2 = $EMAIL = $DOMICILIO = $POBLACION = $PROVINCIA = $NIF = $TELEFONO ="";
      if ($_SERVER["REQUEST_METHOD"]=="POST") {
     
       if (empty($_POST["NOMBRE"])) {
@@ -11,19 +14,19 @@
       else {
         $NOMBRE = test_input($_POST["NOMBRE"]);
       }
-      if (empty($_POST['APELLIDO_1'])) {
+      if (empty($_POST['APELLIDO1'])) {
         $APELLIDO_1ERR="El primer apellido es un campo obligatorio";
         $ENCUENTRAERROR=1;
       }
       else {
-        $APELLIDO_1 = test_input($_POST['APELLIDO_1']);
+        $APELLIDO_1 = test_input($_POST['APELLIDO1']);
       }
-      if (empty($_POST['APELLIDO_2'])) {
+      if (empty($_POST['APELLIDO2'])) {
         $APELLIDO_2ERR="El segundo apellido es un campo obligatorio";
         $ENCUENTRAERROR=1;
       }
       else {
-        $APELLIDO_2 = test_input($_POST['APELLIDO_2']);
+        $APELLIDO_2 = test_input($_POST['APELLIDO2']);
       }
       if (empty($_POST['EMAIL'])) {
         $EMAILERR="Email es un campo obligatorio";
@@ -81,59 +84,15 @@
        $data = htmlspecialchars($data);
        return $data;
      }
+
      
-      function mostrardatos()
-      {
-        include 'conexion.php';
-        $sql = "SELECT * FROM usuarios";
-
-        $results = mysqli_query($conn, $sql) or
-          die("Problemas en el select:" . mysqli_error($conn));
-
-        if (mysqli_num_rows($results) > 0) {
-          echo "<table class='tabla'>
-          <tr>
-          <th> NOMBRE </th>
-          <th> APELLIDO_1 </th>
-          <th> APELLIDO_2 </th>
-          <th> EMAIL </th>
-          <th> DOMICILIO </th>
-          <th> POBLACION </th>
-          <th> PROVINCIA </th>
-          <th> NIF </th>
-          <th> TELEFONO </th>
-          <th> FECHA_NACIMIENTO </th>
-          </tr>";
-
-          while ($row = mysqli_fetch_assoc($results)) {
-
-            echo "<tr>
-            <td> " . $row["NOMBRE"] . "</td>
-            <td> " . $row["APELLIDO_1"] . "</td>
-            <td> " . $row["APELLIDO_2"] . "</td>
-            <td> " . $row["EMAIL"] . "</td>
-            <td> " . $row["DOMICILIO"] . "</td>
-            <td> " . $row["POBLACION"] . "</td>
-            <td> " . $row["PROVINCIA"] . "</td>
-            <td> " . $row["NIF"] . "</td>
-            <td> " . $row["TELEFONO"] . "</td>   
-            <td> " . $row["BIRHTDAY"] . "</td>     
-            </tr>";
-          }
-        } else {
-          echo "0 results";
-        }
-        echo "</table>";
-        mysqli_close($conn);
-      }
-      //aqui se cierra la funcion mostrardatos
-
       //ahora nos conectamos a la base de datos
       //comprobamos si ha encontrado algun error
      if ($ENCUENTRAERROR==1) {
       echo $NOMBREERR;
-      echo $APELLIDO_1ERR;
-      echo $APELLIDO_2ERR;
+      echo $APELLIDO1ERR;
+      echo $APELLIDO2ERR;
+      echo $EMAILERR;
       echo $DOMICILIOERR;
       echo $POBLACIONERR;
       echo $PROVINCIAERR;
@@ -142,11 +101,11 @@
      }
      else {
             
-        include 'conexion.php';
+      include 'conexion.php';
       
       $NOMBRE = $_POST['NOMBRE'];
-      $APELLIDO_1 = $_POST['APELLIDO_1'];
-      $APELLIDO_2 = $_POST['APELLIDO_2'];
+      $APELLIDO1 = $_POST['APELLIDO1'];
+      $APELLIDO2 = $_POST['APELLIDO2'];
       $EMAIL = $_POST['EMAIL'];
       $DOMICILIO = $_POST['DOMICILIO'];
       $POBLACION = $_POST['POBLACION'];
@@ -156,18 +115,44 @@
       $BIRTHDAY = $_POST['BIRTHDAY'];
 
       //incluir un if para cazar error por campo vacio 
-      $sql = "INSERT INTO usuarios (Usuario_nombre,Usuario_apellido1,Usuario_apellido2,Usuario_email,Usuario_domicilio,Usuario_poblacion,Usuario_provincia,Usuario_nif,Usuario_numero_telefono,Usuario_fecha_nacimiento) 
-      VALUES ('$NOMBRE', '$APELLIDO_1', '$APELLIDO_2', '$EMAIL' , '$DOMICILIO' ,'$POBLACION','$PROVINCIA','$NIF','$TELEFONO','$BIRTHDAY')";
+      $sql = "UPDATE usuarios SET Usuario_nombre='$NOMBRE',Usuario_apellido1='$APELLIDO1',Usuario_apellido2='$APELLIDO2',Usuario_email='$EMAIL',Usuario_domicilio='$DOMICILIO',Usuario_poblacion='$POBLACION',Usuario_provincia='$PROVINCIA',Usuario_nif='$NIF',Usuario_numero_telefono='$TELEFONO',Usuario_fecha_nacimiento='$BIRTHDAY' WHERE Usuario_email='$EMAILSESSION'";
+    ;
 
       if (mysqli_query($conn, $sql)) {
-        echo ""; //"<h4>Nuevo registro creado correctamente</h4>";
+        echo "Registro actualizado";
+        include 'desconexion.php';
+        $_SESSION['NOMBRE']=$NOMBRE;
+        $_SESSION['APELLIDO1']=$APELLIDO1;
+        $_SESSION['APELLIDO2']=$APELLIDO2;
+        $_SESSION['EMAIL']=$EMAIL;
+        $_SESSION['DOMICILIO']=$DOMICILIO;
+        $_SESSION['POBLACION']=$POBLACION;
+        $_SESSION['PROVINCIA']=$PROVINCIA;
+        $_SESSION['NIF']=$NIF;
+        $_SESSION['TELEFONO']=$TELEFONO;
+        $_SESSION['BIRTHDAY']=$BIRTHDAY;
+        $url = "perfilUsuario.php";
+        header("Location: " . $url);
+        exit();
         
       } else {
-        echo "Error al dar de alta el libro: " . $sql . "<br>" . mysqli_error($con);
-       
-      }
-      mysqli_close($conn);
-      //ahora llamamos a la funcion de mostrar datos, tras habernos conectado a nuestra bdd
-      mostrardatos();
+        echo "Error al completar el perfil del usuario: " . $sql . "<br>" . mysqli_error($con);
+        include 'desconexion.php';
+        $_SESSION['NOMBRE']=$NOMBRE;
+        $_SESSION['APELLIDO1']=$APELLIDO1;
+        $_SESSION['APELLIDO2']=$APELLIDO2;
+        $_SESSION['EMAIL']=$EMAIL;
+        $_SESSION['DOMICILIO']=$DOMICILIO;
+        $_SESSION['POBLACION']=$POBLACION;
+        $_SESSION['PROVINCIA']=$PROVINCIA;
+        $_SESSION['NIF']=$NIF;
+        $_SESSION['TELEFONO']=$TELEFONO;
+        $_SESSION['BIRTHDAY']=$BIRTHDAY;
+        $url = "perfilUsuario.php";
+        header("Location: " . $url);
+        exit();
+        }
+      
+     
     }
       ?>

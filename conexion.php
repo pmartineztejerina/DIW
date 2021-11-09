@@ -6,9 +6,11 @@ $dbpassword = ""; // password de acceso para el usuario de la
 // linea anterior
 $db = "diw"; // Seleccionamos la base con la cual trabajar
 
-$conn = mysqli_connect($dbhost, $dbusuario, $dbpassword, $db);
-if ($conn -> connect_error) {
-    die("Problemas con la conexion".$con->connect_error);
-} 
-echo "Conectado correctamente";
+$conn = new mysqli($dbhost, $dbusuario, $dbpassword, $db);
+if ($conn -> connect_errno) {
+    die("Problemas con la conexion".$conn->connect_error);
+} else {
+ echo "Conectado correctamente";
+}
+
 ?>

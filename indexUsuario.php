@@ -44,7 +44,6 @@ if (!isset($_SESSION['EMAIL'])) {
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item"><a class="nav-link" href="indexUsuario.php">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href="perfilUsuario.php">Perfil</a></li>
-                        
                         <li class="nav-item">
                             <a class="nav-link" href="logout.php">Log out</a>
                         </li>
@@ -66,6 +65,7 @@ if (!isset($_SESSION['EMAIL'])) {
             </div>
             <div class="mb-3 upload_form">
                 <form action="upload.php" method="post" enctype="multipart/form-data">
+                <?php $_SESSION['URL']="indexUsuario.php";  ?>
                     <h2 class="visually-hidden">Login Form</h2>
                     <div class="illustration">
                         <input class="form-control" type="file" name="imageUpload" id="fileUpload" placeholder="Seleccione archivo">
