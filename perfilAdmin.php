@@ -1,8 +1,15 @@
 <?php 
 session_start();
 if (!isset($_SESSION['EMAIL'])){
-    $_SESSION['EMAIL'] = "";
-    $_SESSION['BIRTHDAY']="";
+    $_SESSION['EMAIL']="";
+    $_SESSION['NOMBRE'] = "";
+    $_SESSION['APELLIDO1'] = "";
+    $_SESSION['APELLIDO2'] = "";
+    $_SESSION['DOMICILIO'] = "";
+    $_SESSION['POBLACION'] = "";
+    $_SESSION['PROVINCIA'] = "";
+    $_SESSION['NIF'] = "";
+    $_SESSION['TELEFONO'] = "";
 }
 ?>
 <!DOCTYPE html>
@@ -52,27 +59,40 @@ if (!isset($_SESSION['EMAIL'])){
             </div>
         </div>
     </nav>
-        <div class="container">       
-            <form action="compruebaUsuario.php" method="post">
+<?php
+
+$NOMBRE=$_SESSION['NOMBRE'];
+$APELLIDO1=$_SESSION['APELLIDO1'];
+$APELLIDO2=$_SESSION['APELLIDO2'];
+$EMAIL=$_SESSION['EMAIL'];
+$DOMICILIO=$_SESSION['DOMICILIO'];
+$POBLACION=$_SESSION['POBLACION'];
+$PROVINCIA=$_SESSION['PROVINCIA'];
+$NIF=$_SESSION['NIF'];
+$TELEFONO=$_SESSION['TELEFONO'];
+
+$_SESSION['URL']="perfilAdmin.php"; 
+
+?>
+        <div class="container">     
+        <form action="compruebaUsuario.php" method="post">
             <h2 class="visually-hidden">Login Form</h2>
             <div class="illustration">
-                <input class="form-control" type="text" name="NOMBRE" placeholder="Nombre" required>
-                <input class="form-control" type="text" name="APELLIDO1" placeholder="Primer apellido" required>
-                <input class="form-control" type="text" name="APELLIDO2" placeholder="Segundo Apellido" required>
-                <input class="form-control" type="email" name="EMAIL" placeholder="Email" value="<?php echo $_SESSION['EMAIL']; ?>" required>
-                <input class="form-control" type="text" name="DOMICILIO" placeholder="Domicilio" required>
-                <input class="form-control" type="text" name="POBLACION" placeholder="Poblacion" required>
-                <input class="form-control" type="text" name="PROVINCIA" placeholder="Provincia" required>
-                <input class="form-control" type="text" name="NIF" placeholder="NIF" required>
-                <input class="form-control" type="text" name="TELEFONO" placeholder="Telefono" required>
-                <input class="form-control" type="date" name="BIRTHDAY" placeholder="Fecha de nacimiento" value="<?php echo $_SESSION['BIRTHDAY']; ?>" required />
+                <input class="form-control" type="text" name="NOMBRE" placeholder="Nombre" value="<?php echo $NOMBRE; ?>" >
+                <input class="form-control" type="text" name="APELLIDO1" placeholder="Primer apellido" value="<?php echo $APELLIDO1; ?>" >
+                <input class="form-control" type="text" name="APELLIDO2" placeholder="Segundo Apellido" value="<?php echo $APELLIDO2; ?>" >
+                <input class="form-control" type="email" name="EMAIL" placeholder="Email" value="<?php echo $EMAIL; ?>" disable >
+                <input class="form-control" type="text" name="DOMICILIO" placeholder="Domicilio" value="<?php echo $DOMICILIO; ?>" >
+                <input class="form-control" type="text" name="POBLACION" placeholder="Poblacion" value="<?php echo $POBLACION; ?>" >
+                <input class="form-control" type="text" name="PROVINCIA" placeholder="Provincia" value="<?php echo $PROVINCIA; ?>" >
+                <input class="form-control" type="text" name="NIF" placeholder="NIF" value="<?php echo $NIF; ?>" >
+                <input class="form-control" type="text" name="TELEFONO" placeholder="Telefono" value="<?php echo $TELEFONO; ?>" >
+                
             </div>
-            
             <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Guardar cambios</button></div>
-            </form>
-        </div>
+        </form>
+        </div> 
     </section>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
-
 </html>

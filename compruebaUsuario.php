@@ -1,40 +1,38 @@
 <?php
 session_start();
-$_SESSION['EMAIL'] = "";
+if (!isset($_SESSION['EMAIL'])){
+  $_SESSION['EMAIL']="";
+  $_SESSION['URL']="";
+}
 
-    $ENCUENTRAERROR=0; 
-     $NOMBREERR = $APELLIDO1ERR = $APELLIDO2ERR = $EMAILERR= $DOMICILIOERR = $POBLACIONERR = $PROVINCIAERR = $NIFERR = $TELEFONOERR  ="";
-     $NOMBRE = $APELLIDO1 = $APELLIDO2 = $EMAIL = $DOMICILIO = $POBLACION = $PROVINCIA = $NIF = $TELEFONO ="";
-     if ($_SERVER["REQUEST_METHOD"]=="POST") {
+$ENCUENTRAERROR=0; 
+$NOMBREERR = $APELLIDO1ERR = $APELLIDO2ERR = $DOMICILIOERR = $POBLACIONERR = $PROVINCIAERR = $NIFERR = $TELEFONOERR  ="";
+$NOMBRE = $APELLIDO1 = $APELLIDO2 = $DOMICILIO = $POBLACION = $PROVINCIA = $NIF = $TELEFONO ="";
+$EMAIL=$_SESSION['EMAIL'];
+$url=$_SESSION['URL'];
+echo $EMAIL."ha cogido bien la sesion";
+
+if ($_SERVER["REQUEST_METHOD"]=="POST") {
     
       if (empty($_POST["NOMBRE"])) {
         $NOMBREERR="Nombre es un campo obligatorio";
         $ENCUENTRAERROR=1;
-      }
-      else {
+      } else {
         $NOMBRE = test_input($_POST["NOMBRE"]);
       }
       if (empty($_POST['APELLIDO1'])) {
         $APELLIDO_1ERR="El primer apellido es un campo obligatorio";
         $ENCUENTRAERROR=1;
-      }
-      else {
-        $APELLIDO_1 = test_input($_POST['APELLIDO1']);
+      } else {
+        $APELLIDO1 = test_input($_POST['APELLIDO1']);
       }
       if (empty($_POST['APELLIDO2'])) {
         $APELLIDO_2ERR="El segundo apellido es un campo obligatorio";
         $ENCUENTRAERROR=1;
+      } else {
+        $APELLIDO2 = test_input($_POST['APELLIDO2']);
       }
-      else {
-        $APELLIDO_2 = test_input($_POST['APELLIDO2']);
-      }
-      if (empty($_POST['EMAIL'])) {
-        $EMAILERR="Email es un campo obligatorio";
-        $ENCUENTRAERROR=1;
-      }
-      else {
-        $EMAIL = test_input($_POST['EMAIL']);
-      }
+      
       if (empty($_POST['DOMICILIO'])) {
         $DOMICILIOERR="Domicilio es un campo obligatorio";
         $ENCUENTRAERROR=1;
@@ -70,13 +68,7 @@ $_SESSION['EMAIL'] = "";
       else {
         $TELEFONO = test_input($_POST['TELEFONO']);
       }
-      if (empty($_POST['BIRTHDAY'])) {
-        $BIRTHDAYERR="Cumpleaños es un campo obligatorio";
-        $ENCUENTRAERROR=1;
-      }
-      else {
-        $BIRTHDAY = test_input($_POST['BIRTHDAY']);
-      }
+      
      }
      function test_input($data){
        $data = trim($data);
@@ -92,67 +84,37 @@ $_SESSION['EMAIL'] = "";
       echo $NOMBREERR;
       echo $APELLIDO1ERR;
       echo $APELLIDO2ERR;
-      echo $EMAILERR;
       echo $DOMICILIOERR;
       echo $POBLACIONERR;
       echo $PROVINCIAERR;
       echo $NIFERR;
       echo $TELEFONOERR;
-     }
-     else {
+
+      echo "encuentra error";
+     } else {
             
       include 'conexion.php';
       
-      $NOMBRE = $_POST['NOMBRE'];
-      $APELLIDO1 = $_POST['APELLIDO1'];
-      $APELLIDO2 = $_POST['APELLIDO2'];
-      $EMAIL = $_POST['EMAIL'];
-      $DOMICILIO = $_POST['DOMICILIO'];
-      $POBLACION = $_POST['POBLACION'];
-      $PROVINCIA = $_POST['PROVINCIA'];
-      $NIF = $_POST['NIF'];
-      $TELEFONO = $_POST['TELEFONO'];
-      $BIRTHDAY = $_POST['BIRTHDAY'];
-
+      
       //incluir un if para cazar error por campo vacio 
-      $sql = "UPDATE usuarios SET Usuario_nombre='$NOMBRE',Usuario_apellido1='$APELLIDO1',Usuario_apellido2='$APELLIDO2',Usuario_email='$EMAIL',Usuario_domicilio='$DOMICILIO',Usuario_poblacion='$POBLACION',Usuario_provincia='$PROVINCIA',Usuario_nif='$NIF',Usuario_numero_telefono='$TELEFONO',Usuario_fecha_nacimiento='$BIRTHDAY' WHERE Usuario_email='$EMAILSESSION'";
-    ;
-
+      $sql = "UPDATE usuarios SET Usuario_nombre='$NOMBRE',Usuario_apellido1='$APELLIDO1',Usuario_apellido2='$APELLIDO2',Usuario_domicilio='$DOMICILIO',Usuario_poblacion='$POBLACION',Usuario_provincia='$PROVINCIA',Usuario_nif='$NIF',Usuario_numero_telefono='$TELEFONO' WHERE Usuario_email='$EMAIL'";
+    
       if (mysqli_query($conn, $sql)) {
         echo "Registro actualizado";
         include 'desconexion.php';
-        $_SESSION['NOMBRE']=$NOMBRE;
-        $_SESSION['APELLIDO1']=$APELLIDO1;
-        $_SESSION['APELLIDO2']=$APELLIDO2;
         $_SESSION['EMAIL']=$EMAIL;
-        $_SESSION['DOMICILIO']=$DOMICILIO;
-        $_SESSION['POBLACION']=$POBLACION;
-        $_SESSION['PROVINCIA']=$PROVINCIA;
-        $_SESSION['NIF']=$NIF;
-        $_SESSION['TELEFONO']=$TELEFONO;
-        $_SESSION['BIRTHDAY']=$BIRTHDAY;
-        $url = "perfilUsuario.php";
+              
+       
         header("Location: " . $url);
         exit();
         
       } else {
-        echo "Error al completar el perfil del usuario: " . $sql . "<br>" . mysqli_error($con);
+        echo "Error al completar el perfil del usuario: " . $sql . "<br>" . mysqli_error($conn);
         include 'desconexion.php';
-        $_SESSION['NOMBRE']=$NOMBRE;
-        $_SESSION['APELLIDO1']=$APELLIDO1;
-        $_SESSION['APELLIDO2']=$APELLIDO2;
         $_SESSION['EMAIL']=$EMAIL;
-        $_SESSION['DOMICILIO']=$DOMICILIO;
-        $_SESSION['POBLACION']=$POBLACION;
-        $_SESSION['PROVINCIA']=$PROVINCIA;
-        $_SESSION['NIF']=$NIF;
-        $_SESSION['TELEFONO']=$TELEFONO;
-        $_SESSION['BIRTHDAY']=$BIRTHDAY;
-        $url = "perfilUsuario.php";
+               
         header("Location: " . $url);
         exit();
-        }
-      
-     
-    }
-      ?>
+      }
+  }
+  ?>

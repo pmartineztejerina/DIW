@@ -2,23 +2,15 @@
 session_start();
 if (!isset($_SESSION['EMAIL'])){
     $_SESSION['EMAIL']="";
-    $_SESSION['BIRTHDAY']="";
+    $_SESSION['NOMBRE'] = "";
+    $_SESSION['APELLIDO1'] = "";
+    $_SESSION['APELLIDO2'] = "";
+    $_SESSION['DOMICILIO'] = "";
+    $_SESSION['POBLACION'] = "";
+    $_SESSION['PROVINCIA'] = "";
+    $_SESSION['NIF'] = "";
+    $_SESSION['TELEFONO'] = "";
 }
-include 'conexion.php';
-$NOMBRE=$APELLIDO1=$APELLIDO2=$EMAIL=$DOMICILIO=$POBLACION=$PROVINCIA=$NIF=$TELEFONO=$BIRTHDAY="";
-$EMAIL=$_SESSION['EMAIL'];
-echo $EMAIL;
-
-$sql = "SELECT * FROM usuarios WHERE 'Usuario_email' = '$EMAIL'";
-$results = $conn -> query($sql);
-if ($results === false) {
-    echo "SQL Error: " . $conn->error;
-}
-echo $conn->info;
-
-
-while ($row = $results->fetch_row()) {
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -57,28 +49,40 @@ while ($row = $results->fetch_row()) {
                 </div>
             </div>
     </nav>
-         <div class="container">     
+<?php
+
+$NOMBRE=$_SESSION['NOMBRE'];
+$APELLIDO1=$_SESSION['APELLIDO1'];
+$APELLIDO2=$_SESSION['APELLIDO2'];
+$EMAIL=$_SESSION['EMAIL'];
+$DOMICILIO=$_SESSION['DOMICILIO'];
+$POBLACION=$_SESSION['POBLACION'];
+$PROVINCIA=$_SESSION['PROVINCIA'];
+$NIF=$_SESSION['NIF'];
+$TELEFONO=$_SESSION['TELEFONO'];
+
+$_SESSION['URL']="perfilUsuario.php"; 
+
+?>
+        <div class="container">     
         <form action="compruebaUsuario.php" method="post">
             <h2 class="visually-hidden">Login Form</h2>
             <div class="illustration">
-                <input class="form-control" type="text" name="NOMBRE" placeholder="Nombre" value="<?php echo $row['Usuario_nombre'];?>" >
-                <input class="form-control" type="text" name="APELLIDO1" placeholder="Primer apellido" value="<?php echo $row['Usuario_apellido1'];?>" >
-                <input class="form-control" type="text" name="APELLIDO2" placeholder="Segundo Apellido" value="<?php echo $row['Usuario_apellido2'];?>" >
-                <input class="form-control" type="email" name="EMAIL" placeholder="Email" value="<?php echo $row['Usuario_email'];?>" >
-                <input class="form-control" type="text" name="DOMICILIO" placeholder="Domicilio" value="<?php echo $row['Usuario_domicilio'];?>" >
-                <input class="form-control" type="text" name="POBLACION" placeholder="Poblacion" value="<?php echo $row['Usuario_poblacion'];?>" >
-                <input class="form-control" type="text" name="PROVINCIA" placeholder="Provincia" value="<?php echo $row['Usuario_provincia'];?>" >
-                <input class="form-control" type="text" name="NIF" placeholder="NIF" value="<?php echo $row['Usuario_nif'];?>" >
-                <input class="form-control" type="text" name="TELEFONO" placeholder="Telefono" value="<?php echo $row['Usuario_telefono'];?>" >
-                <input class="form-control" type="date" name="BIRTHDAY" placeholder="Fecha de nacimiento" value="<?php echo $row['Usuario_fecha_nacimiento'];}?>" >
+                <input class="form-control" type="text" name="NOMBRE" placeholder="Nombre" value="<?php echo $NOMBRE; ?>" >
+                <input class="form-control" type="text" name="APELLIDO1" placeholder="Primer apellido" value="<?php echo $APELLIDO1; ?>" >
+                <input class="form-control" type="text" name="APELLIDO2" placeholder="Segundo Apellido" value="<?php echo $APELLIDO2; ?>" >
+                <input class="form-control" type="email" name="EMAIL" placeholder="Email" value="<?php echo $EMAIL; ?>" disable >
+                <input class="form-control" type="text" name="DOMICILIO" placeholder="Domicilio" value="<?php echo $DOMICILIO; ?>" >
+                <input class="form-control" type="text" name="POBLACION" placeholder="Poblacion" value="<?php echo $POBLACION; ?>" >
+                <input class="form-control" type="text" name="PROVINCIA" placeholder="Provincia" value="<?php echo $PROVINCIA; ?>" >
+                <input class="form-control" type="text" name="NIF" placeholder="NIF" value="<?php echo $NIF; ?>" >
+                <input class="form-control" type="text" name="TELEFONO" placeholder="Telefono" value="<?php echo $TELEFONO; ?>" >
+                
             </div>
-            <div class="mb-3"></div>
-            <div class="mb-3"></div>
             <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Guardar cambios</button></div>
         </form>
         </div> 
     </section>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
-
 </html>

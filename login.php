@@ -139,6 +139,17 @@ if ($ENCUENTRAERROR == 1) {
               $_SESSION['PERFIL'] = "admin";
               $_SESSION['user_id'] = $row['Usuario_id'];
               $_SESSION['profile_image'] = $row['Usuario_fotografia'];
+              //aprovecho y saco todos los campos de la BBDD
+              $_SESSION['NOMBRE'] = $row['Usuario_nombre'];
+              $_SESSION['APELLIDO1'] = $row['Usuario_apellido1'];
+              $_SESSION['APELLIDO2'] = $row['Usuario_apellido2'];
+              $_SESSION['DOMICILIO'] = $row['Usuario_domicilio'];
+              $_SESSION['POBLACION'] = $row['Usuario_poblacion'];
+              $_SESSION['PROVINCIA'] = $row['Usuario_provincia'];
+              $_SESSION['NIF'] = $row['Usuario_nif'];
+              $_SESSION['TELEFONO'] = $row['Usuario_numero_telefono'];
+
+
               include 'desconexion.php';
               $url = "indexAdministrador.php";
               header("Location: " . $url);
@@ -146,10 +157,19 @@ if ($ENCUENTRAERROR == 1) {
             }
           } else {
             //usuario
-            $_SESSION["EMAIL"] = $row['Usuario_email'];
+            $_SESSION['EMAIL'] = $row['Usuario_email'];
             $_SESSION['PERFIL'] = "usuario";
             $_SESSION['user_id'] = $row['Usuario_id'];
             $_SESSION['profile_image'] = $row['Usuario_fotografia'];
+            //aprovecho y saco todos los campos de la BBDD
+            $_SESSION['NOMBRE'] = $row['Usuario_nombre'];
+            $_SESSION['APELLIDO1'] = $row['Usuario_apellido1'];
+            $_SESSION['APELLIDO2'] = $row['Usuario_apellido2'];
+            $_SESSION['DOMICILIO'] = $row['Usuario_domicilio'];
+            $_SESSION['POBLACION'] = $row['Usuario_poblacion'];
+            $_SESSION['PROVINCIA'] = $row['Usuario_provincia'];
+            $_SESSION['NIF'] = $row['Usuario_nif'];
+            $_SESSION['TELEFONO'] = $row['Usuario_numero_telefono'];
             include 'desconexion.php';
             $url = "indexUsuario.php";
             header("Location: " . $url);
