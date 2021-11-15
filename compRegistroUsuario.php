@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!isset($_SESSION['EMAIL'])){
+    $_SESSION['EMAIL']="";
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -7,34 +10,53 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>FORMULARIO DIW</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <title>PERFIL ADMINISTRADOR</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min - usuario.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/Header-Blue.css">
-    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Dark - usuario.css">
     <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
     <section class="login-dark">
-        <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
-            <div class="container"><a class="navbar-brand" href="#">FORMULARIO REGISTRO DIW</a>
-                <div class="collapse navbar-collapse" id="navcol-1">
-                    <ul class="navbar-nav me-auto"></ul><span class="navbar-text actions"> <a class="login" href="login.php">Log In</a><a class="btn btn-light action-button" role="button" href="#">Sign Up</a></span>
-                </div>
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+        <div class="container">
+            <h3 class="navbar-brand"><?php echo $_SESSION['EMAIL']; ?></h3>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="indexAdministrador.php">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="perfilAdmin.php">Perfil</a></li>
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="">Administracion </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="añadirUsuario.php">Añadir usuario</a>
+                            <a class="dropdown-item" href="#">Borrar usuario</a>
+                            <a class="dropdown-item" href="#">Modificar usuario</a>
+                            <a class="dropdown-item" href="consultaUsuario.php">Consulta usuarios</a>
+                            <!-- <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Localizacion</a> -->
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Log out</a>
+                    </li>
+                </ul>
+                <span class="navbar-text actions"> 
+                    <a class="login" href="login.php">Log In</a>
+                    <a class="btn btn-light action-button" role="button" href="index.php">Sign Up</a>
+                </span>
             </div>
-        </nav>
-        </section>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-
+        </div>
+    </nav>
   <?php
   include 'conexion.php';
-
-  $EMAIL = $PASSWORD = $PASSWORDBIS = $BIRTHDAY = "";
+    echo "empiezo a comprobar datos";
+  $EMAIL = $PASSWORD = $BIRTHDAY = "";
   $ENCUENTRAERROR = $PASSWORDNOVALIDA = 0;
-  $EMAILERR = $PASSWORDERR = $PASSWORDBISERR = $BIRTHDAYERR = "";
+  $EMAILERR = $PASSWORDERR = $BIRTHDAYERR = "";
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($_POST['EMAIL'])) {
@@ -67,27 +89,14 @@ session_start();
       }
     }
 
-    if (empty($_POST['PASSWORDBIS'])) {
-      $PASSWORDBISERR = "La contraseña es un campo obligatorio";
-      $ENCUENTRAERROR = 1;
-    } else {
-      $PASSWORDBIS = test_input($_POST['PASSWORDBIS']);
-    }
-
     if (empty($_POST['BIRTHDAY'])) {
       $BIRTHDAYERR = "Fecha de nacimiento es un campo obligatorio";
       $ENCUENTRAERROR = 1;
     } else {
       $BIRTHDAY = test_input($_POST['BIRTHDAY']);
     }
-
-    if ($PASSWORD != $PASSWORDBIS) {
-      $ENCUENTRAERROR = 1;
-      $PASSWORDNOVALIDA = 1;
-    }
   }
-  function test_input($data)
-  {
+  function test_input($data){
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -95,16 +104,11 @@ session_start();
   }
 
   if ($ENCUENTRAERROR == 1) {
-    if ($ENCUENTRAERROR == 1 && $PASSWORDNOVALIDA == 0) {
-      echo $EMAILERR;
-      echo $PASSWORDERR;
-      echo $PASSWORDBISERR;
-      echo $BIRTHDAYERR;
-    } elseif ($ENCUENTRAERROR == 1 && $PASSWORDNOVALIDA == 1) {
-      echo "Las contraseñas que ha introducido no coinciden, vuélvalo a intentar";
-    }
+    echo $EMAILERR;
+    echo $PASSWORDERR;
+    echo $BIRTHDAYERR;
   } else {
-    
+    echo "entro en comprobar email";
     //compruebo si ya esta el mail en la BBDD
     $sql = "SELECT Usuario_email FROM usuarios WHERE Usuario_email = '$EMAIL'";
     
@@ -132,8 +136,7 @@ session_start();
         $_SESSION['PASSWORD'] = $PASSWORD;
 
         include 'desconexion.php';
-        include 'logout.php';
-        $url = "login.php";
+        $url = "añadirUsuario.php";
         header("Location: " . $url);
         exit();
 

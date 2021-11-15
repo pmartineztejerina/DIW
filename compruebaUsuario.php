@@ -10,15 +10,13 @@ $NOMBREERR = $APELLIDO1ERR = $APELLIDO2ERR = $DOMICILIOERR = $POBLACIONERR = $PR
 $NOMBRE = $APELLIDO1 = $APELLIDO2 = $DOMICILIO = $POBLACION = $PROVINCIA = $NIF = $TELEFONO ="";
 $EMAIL=$_SESSION['EMAIL'];
 $url=$_SESSION['URL'];
-echo $EMAIL."ha cogido bien la sesion";
 
 if ($_SERVER["REQUEST_METHOD"]=="POST") {
-    
-      if (empty($_POST["NOMBRE"])) {
-        $NOMBREERR="Nombre es un campo obligatorio";
+      if (empty($_POST['NOMBRE'])) {
+        $NOMBREERR="El primer apellido es un campo obligatorio";
         $ENCUENTRAERROR=1;
       } else {
-        $NOMBRE = test_input($_POST["NOMBRE"]);
+        $NOMBRE = test_input($_POST['NOMBRE']);
       }
       if (empty($_POST['APELLIDO1'])) {
         $APELLIDO_1ERR="El primer apellido es un campo obligatorio";
@@ -36,36 +34,31 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
       if (empty($_POST['DOMICILIO'])) {
         $DOMICILIOERR="Domicilio es un campo obligatorio";
         $ENCUENTRAERROR=1;
-      }
-      else {
+      } else {
         $DOMICILIO = test_input($_POST['DOMICILIO']);
       }
       if (empty($_POST['POBLACION'])) {
         $POBLACIONERR="Poblacion es un campo obligatorio";
         $ENCUENTRAERROR=1;
-      }
-      else {
+      } else {
         $POBLACION = test_input($_POST['POBLACION']);
       }
       if (empty($_POST['PROVINCIA'])) {
         $PROVINCIAERR="Provincia es un campo obligatorio";
         $ENCUENTRAERROR=1;
-      }
-      else {
+      } else {
         $PROVINCIA = test_input($_POST['PROVINCIA']);
       }
       if (empty($_POST['NIF'])) {
         $NIFERR="NIF es un campo obligatorio";
         $ENCUENTRAERROR=1;
-      }
-      else {
+      } else {
         $NIF = test_input($_POST['NIF']);
       }
       if (empty($_POST['TELEFONO'])) {
         $TELEFONOERR="Telefono es un campo obligatorio";
         $ENCUENTRAERROR=1;
-      }
-      else {
+      } else {
         $TELEFONO = test_input($_POST['TELEFONO']);
       }
       
@@ -94,7 +87,14 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
      } else {
             
       include 'conexion.php';
-      
+      $NOMBRE=strtoupper($NOMBRE);
+      $APELLIDO1=strtoupper($APELLIDO1);
+      $APELLIDO2=strtoupper($APELLIDO2);
+      $DOMICILIO=strtoupper($DOMICILIO);
+      $POBLACION=strtoupper($POBLACION);
+      $PROVINCIA=strtoupper($PROVINCIA);
+      $NIF=strtoupper($NIF);
+      $TELEFONO=strtoupper($TELEFONO);
       
       //incluir un if para cazar error por campo vacio 
       $sql = "UPDATE usuarios SET Usuario_nombre='$NOMBRE',Usuario_apellido1='$APELLIDO1',Usuario_apellido2='$APELLIDO2',Usuario_domicilio='$DOMICILIO',Usuario_poblacion='$POBLACION',Usuario_provincia='$PROVINCIA',Usuario_nif='$NIF',Usuario_numero_telefono='$TELEFONO' WHERE Usuario_email='$EMAIL'";
@@ -117,4 +117,3 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
         exit();
       }
   }
-  ?>

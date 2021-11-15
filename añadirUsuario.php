@@ -2,14 +2,6 @@
 session_start();
 if (!isset($_SESSION['EMAIL'])){
     $_SESSION['EMAIL']="";
-    $_SESSION['NOMBRE'] = "";
-    $_SESSION['APELLIDO1'] = "";
-    $_SESSION['APELLIDO2'] = "";
-    $_SESSION['DOMICILIO'] = "";
-    $_SESSION['POBLACION'] = "";
-    $_SESSION['PROVINCIA'] = "";
-    $_SESSION['NIF'] = "";
-    $_SESSION['TELEFONO'] = "";
 }
 ?>
 <!DOCTYPE html>
@@ -61,35 +53,18 @@ if (!isset($_SESSION['EMAIL'])){
     </nav>
 <?php
 
-$NOMBRE=$_SESSION['NOMBRE'];
-$APELLIDO1=$_SESSION['APELLIDO1'];
-$APELLIDO2=$_SESSION['APELLIDO2'];
-$EMAIL=$_SESSION['EMAIL'];
-$DOMICILIO=$_SESSION['DOMICILIO'];
-$POBLACION=$_SESSION['POBLACION'];
-$PROVINCIA=$_SESSION['PROVINCIA'];
-$NIF=$_SESSION['NIF'];
-$TELEFONO=$_SESSION['TELEFONO'];
-
-$_SESSION['URL']="perfilAdmin.php"; 
+$_SESSION['URL']="añadirUsuario.php"; 
 
 ?>
         <div class="container">     
-        <form action="compruebaUsuario.php" method="post">
-            <h2 class="visually-hidden">Login Form</h2>
+        <form action="compRegistroUsuario.php" method="post">
+            <h2 class="visually">Crear usuario</h2>
             <div class="illustration">
-                <input class="form-control" type="text" name="NOMBRE" placeholder="Nombre" value="<?php echo $NOMBRE; ?>" >
-                <input class="form-control" type="text" name="APELLIDO1" placeholder="Primer apellido" value="<?php echo $APELLIDO1; ?>" >
-                <input class="form-control" type="text" name="APELLIDO2" placeholder="Segundo Apellido" value="<?php echo $APELLIDO2; ?>" >
-                <input class="form-control" type="email" name="EMAIL" placeholder="Email" value="<?php echo $EMAIL; ?>" disable >
-                <input class="form-control" type="text" name="DOMICILIO" placeholder="Domicilio" value="<?php echo $DOMICILIO; ?>" >
-                <input class="form-control" type="text" name="POBLACION" placeholder="Poblacion" value="<?php echo $POBLACION; ?>" >
-                <input class="form-control" type="text" name="PROVINCIA" placeholder="Provincia" value="<?php echo $PROVINCIA; ?>" >
-                <input class="form-control" type="text" name="NIF" placeholder="NIF" value="<?php echo $NIF; ?>" >
-                <input class="form-control" type="text" name="TELEFONO" placeholder="Telefono" value="<?php echo $TELEFONO; ?>" >
-                
+                <div class="mb-3"><input class="form-control" type="email" name="EMAIL" placeholder="Email" value="" ></div>
+                <div class="mb-3"><input class="form-control" type="text" name="PASSWORD" placeholder="Contraseña" value="" ></div>
+                <div class="mb-3"><input class="form-control" type="date" name="BIRTHDAY" placeholder="Fecha de nacimiento" value=""></div>
             </div>
-            <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Guardar cambios</button></div>
+            <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Crear usuario</button></div>
         </form>
         </div> 
     </section>

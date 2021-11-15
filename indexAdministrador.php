@@ -44,12 +44,12 @@ if (!isset($_SESSION['EMAIL'])) {
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item"><a class="nav-link" href="indexAdministrador.php">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href="perfilAdmin.php">Perfil</a></li>
-                        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Administracion </a>
+                        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="">Administracion </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Añadir usuario</a>
+                                <a class="dropdown-item" href="añadirUsuario.php">Añadir usuario</a>
                                 <a class="dropdown-item" href="#">Borrar usuario</a>
                                 <a class="dropdown-item" href="#">Modificar usuario</a>
-                                <a class="dropdown-item" href="#">Consulta usuarios</a>
+                                <a class="dropdown-item" href="consultaUsuario.php">Consulta usuarios</a>
                                <!--  <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Localizacion</a> -->
                             </div>
