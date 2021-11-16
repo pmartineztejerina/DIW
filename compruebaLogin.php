@@ -119,7 +119,6 @@ if ($ENCUENTRAERROR == 1) {
                     $_SESSION['NIF'] = $row['Usuario_nif'];
                     $_SESSION['TELEFONO'] = $row['Usuario_numero_telefono'];
 
-                    
                     include 'desconexion.php';
                     $url = "indexUsuario.php";
                     header("Location: " . $url);

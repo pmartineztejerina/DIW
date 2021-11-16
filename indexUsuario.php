@@ -3,6 +3,7 @@ session_start();
 if (!isset($_SESSION['EMAIL'])) {
     $_SESSION['EMAIL'] = "";
     $_SESSION['user_id']="";
+    $_SESSION['profile_image']="";
 }
 ?>
 <!DOCTYPE html>

@@ -13,7 +13,7 @@ $url=$_SESSION['URL'];
 
 if ($_SERVER["REQUEST_METHOD"]=="POST") {
       if (empty($_POST['NOMBRE'])) {
-        $NOMBREERR="El primer apellido es un campo obligatorio";
+        $NOMBREERR="El nombre es un campo obligatorio";
         $ENCUENTRAERROR=1;
       } else {
         $NOMBRE = test_input($_POST['NOMBRE']);
@@ -99,10 +99,20 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
       //incluir un if para cazar error por campo vacio 
       $sql = "UPDATE usuarios SET Usuario_nombre='$NOMBRE',Usuario_apellido1='$APELLIDO1',Usuario_apellido2='$APELLIDO2',Usuario_domicilio='$DOMICILIO',Usuario_poblacion='$POBLACION',Usuario_provincia='$PROVINCIA',Usuario_nif='$NIF',Usuario_numero_telefono='$TELEFONO' WHERE Usuario_email='$EMAIL'";
     
-      if (mysqli_query($conn, $sql)) {
+      if (mysqli_query($conn, $sql)) { 
         echo "Registro actualizado";
         include 'desconexion.php';
         $_SESSION['EMAIL']=$EMAIL;
+        $_SESSION['PERFIL'] = "usuario";
+        $_SESSION['profile_image'] = $row['Usuario_fotografia'];
+        $_SESSION['NOMBRE'] = $NOMBRE;
+        $_SESSION['APELLIDO1'] = $APELLIDO1;
+        $_SESSION['APELLIDO2'] = $APELLIDO2;
+        $_SESSION['DOMICILIO'] = $DOMICILIO;
+        $_SESSION['POBLACION'] = $POBLACION;
+        $_SESSION['PROVINCIA'] = $PROVINCIA;
+        $_SESSION['NIF'] = $NIF;
+        $_SESSION['TELEFONO'] = $TELEFONO;
               
        
         header("Location: " . $url);

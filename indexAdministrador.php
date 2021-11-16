@@ -4,6 +4,7 @@ if (!isset($_SESSION['EMAIL'])) {
     $_SESSION['EMAIL'] = "";
     $_SESSION['user_id']="";
     $_SESSION['PERFIL'] ="";
+    $_SESSION['profile_image']="";
 }
 $EMAILADMIN=$_SESSION['EMAIL'];
 ?>
@@ -50,6 +51,7 @@ $EMAILADMIN=$_SESSION['EMAIL'];
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="añadirUsuario.php">Añadir usuario</a>
                                 <a class="dropdown-item" href="gestionUsuarios.php">Gestion usuarios</a>
+                                <a class="dropdown-item" href="consultaUsuario.php">Consulta usuarios</a>
                                <!--  <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Localizacion</a> -->
                             </div>

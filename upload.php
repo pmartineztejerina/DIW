@@ -54,10 +54,13 @@ if ($uploadOk == 0) {
     include 'conexion.php';
     $EMAILSESSION=$_SESSION['EMAIL']; 
     $sql= "UPDATE usuarios SET Usuario_fotografia='$newFilename' WHERE Usuario_email='$EMAILSESSION'";
-    if (mysqli_query($conn, $sql)) {      
+    if (mysqli_query($conn, $sql)) { 
+      $_SESSION['profile_image']=$row['Usuario_fotografia'];  
+      echo $row['Usuario_fotografia'];  
       echo "Foto subida a la bbdd";
       include 'desconexion.php';
       $url = $_SESSION['URL'];
+      $_SESSION['profile_image']=$row['Usuario_fotografia'];
       Header('Location: '.$url);
       Exit(); 
 
