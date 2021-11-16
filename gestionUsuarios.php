@@ -56,7 +56,7 @@ $EMAILADMIN = $_SESSION['EMAIL'];
         </nav>
         <br>
         <div class="container">
-            <form action="modifica-borra_Usuarios.php" method="post">
+            <form action="modifica-borra_Usuarios.php" method="post" name="f1">
                 <table class="table table-dark table-hover">
                     <thead class="thead-dark">
                         <tr>
@@ -145,14 +145,29 @@ $EMAILADMIN = $_SESSION['EMAIL'];
                     } else {
                         echo "0 results";
                     }
-                    $conn->close();
+                    include 'desconexion.php';
                         ?>
                 </table>
+                <div class="mt-5">
+                    <button type="button" class="btn btn-primary" onclick="seleccionar_todo()">Marcar Todo</button>
+                    <button type="button" class="btn btn-primary" onclick="deseleccionar_todo()">Desmarcar Todo</button>
             </form>
-            <a class="btn btn-primary" href="indexAdministrador.php">Volver menu</a>
         </div>
+            <a class="btn btn-primary" href="indexAdministrador.php">Volver menu</a>
+       
     </section>
-    <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+          function seleccionar_todo(){
+           for (i=0;i<document.f1.elements.length;i++)
+              if(document.f1.elements[i].type == 'checkbox')
+                 document.f1.elements[i].checked=1
+        } 
+        function deseleccionar_todo(){
+           for (i=0;i<document.f1.elements.length;i++)
+              if(document.f1.elements[i].type == 'checkbox')
+                 document.f1.elements[i].checked=0
+        } 
+    </script>
 </body>
 
 </html>

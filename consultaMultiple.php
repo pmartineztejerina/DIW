@@ -56,7 +56,7 @@ $EMAILADMIN = $_SESSION['EMAIL'];
         </nav>
         <br>
         <div class="container">
-            <form action="modifica-borra_Usuarios.php" method="post">
+            <form action="modifica-borra_Usuarios.php" method="post" name="f1">
                 <table class="table table-dark table-hover">
                     <thead class="thead-dark">
                         <tr>
@@ -72,14 +72,7 @@ $EMAILADMIN = $_SESSION['EMAIL'];
                     <?php
 
                     include 'conexion.php';
-                    $resultadoPorPaginas = 4;
-
-                    if (!isset($_GET['pagina'])) {
-                        $pagina = 1;
-                    } else {
-                        $pagina = $_GET['pagina'];
-                    }
-                    
+                   
                     $ENCUENTRAERROR=0; 
                     $EMAIL = $PROVINCIA = $NIF ="";
                     if ($_SERVER["REQUEST_METHOD"]=="POST") {
@@ -115,56 +108,10 @@ $EMAILADMIN = $_SESSION['EMAIL'];
                         $sql .= ' WHERE '.implode(' OR ', $CLAUSES).';';
                     }
 
-                    $sqlNull = 'SELECT * FROM usuarios';
-                    $CLAUSES= array();
-                    $COLUMN1=$EMAIL;
-                    $COLUMN2=$PROVINCIA;
-                    $COLUMN3=$NIF;
-                    if ( isset($COLUMN1) ) {
-                        $CLAUSES[] = '(Usuario_email = "'.$COLUMN1.'")';
-                    }
-                    if ( isset($COLUMN2) ) {
-                        $CLAUSES[] = '(Usuario_provincia = "'.$COLUMN2.'")';
-                    }
-                    if ( isset($COLUMN3) ) {
-                        $CLAUSES[] = '(Usuario_nif  = "'.$COLUMN3.'")';
-                    } 
-                    if ( count($CLAUSES) > 0 ) {
-                        $sqlNull .= ' WHERE '.implode(' OR ', $CLAUSES).';';
-                    }
-                    
-
                     $results = $conn->query($sql);
-                    $resultsNull = $conn->query($sqlNull);
-                    $rownull = $resultsNull->fetch_assoc();
-                    $numeroFilas = $resultsNull->num_rows;
-                   
-                    $paginacion = ceil($numeroFilas / $resultadoPorPaginas);
-                    $primeraPagina = ($pagina - 1) * $resultadoPorPaginas;
-                    
-                    $sqlPaginacion = 'SELECT * FROM usuarios';
-                    $CLAUSES= array();
-                    $COLUMN1=$EMAIL;
-                    $COLUMN2=$PROVINCIA;
-                    $COLUMN3=$NIF;
-                    if ( isset($COLUMN1) ) {
-                        $CLAUSES[] = '(Usuario_email = "'.$COLUMN1.'")';
-                    }
-                    if ( isset($COLUMN2) ) {
-                        $CLAUSES[] = '(Usuario_provincia = "'.$COLUMN2.'")';
-                    }
-                    if ( isset($COLUMN3) ) {
-                        $CLAUSES[] = '(Usuario_nif = "'.$COLUMN3.'")';
-                    } 
-                    if ( count($CLAUSES) > 0 ) {
-                        $sqlPaginacion .= ' WHERE '.implode(' OR ', $CLAUSES).' LIMIT '. 1 . ',' . $resultadoPorPaginas.';';
-                    }
-                    echo $sqlPaginacion;
 
-                    $resultsPagina = $conn->query($sqlPaginacion);
-
-                    if ($resultsPagina->num_rows > 0) {
-                        while ($row = $resultsPagina->fetch_assoc()) {
+                    if ($results->num_rows > 0) {
+                        while ($row = $results->fetch_assoc()) {
                             $id = $row['Usuario_id'];
                             $NOMBRE = $row['Usuario_nombre'];
                             $APELLIDO1 = $row['Usuario_apellido1'];
@@ -187,41 +134,33 @@ $EMAILADMIN = $_SESSION['EMAIL'];
                         }
                         echo "</tbody></table>";
                     ?>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item <?php echo $pagina == 1 ? 'disabled' : '' ?>">
-                                    <a class="page-link" href="consultaMultiple.php?pagina=<?php echo $pagina - 1; ?>" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-
-                                <?php for ($i = 1; $i <= $paginacion; $i++) {
-                                ?>
-                                    <li class="page-item <?php echo $pagina == $i ? 'active' : '' ?>"><a class="page-link" href="consultaMultiple.php?pagina=<?php echo ($i); ?>"><?php echo ($i); ?></a></li>
-                                <?php }  ?>
-
-                                <li class="page-item <?php echo $pagina >= $paginacion ? 'disabled' : '' ?>">
-                                    <a class="page-link" href="<?php echo 'consultaMultiple.php?pagina=' . $pagina + 1; ?>" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <br>
+                       
                         <?php
                     } else {
                         echo "0 results";
                     }
-                    $conn->close();
+                    include 'desconexion.php';
                         ?>
                 </table>
+                <div class="mt-5">
+                    <button type="button" class="btn btn-primary" onclick="seleccionar_todo()">Marcar Todo</button>
+                    <button type="button" class="btn btn-primary" onclick="deseleccionar_todo()">Desmarcar Todo</button>
             </form>
-            <a class="btn btn-primary" href="indexAdministrador.php">Volver menu</a>
         </div>
+        <a class="btn btn-primary" href="indexAdministrador.php">Volver menu</a>
     </section>
-    <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+          function seleccionar_todo(){
+           for (i=0;i<document.f1.elements.length;i++)
+              if(document.f1.elements[i].type == 'checkbox')
+                 document.f1.elements[i].checked=1
+        } 
+        function deseleccionar_todo(){
+           for (i=0;i<document.f1.elements.length;i++)
+              if(document.f1.elements[i].type == 'checkbox')
+                 document.f1.elements[i].checked=0
+        } 
+        </script>
 </body>
 
 </html>

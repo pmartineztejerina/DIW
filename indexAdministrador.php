@@ -7,6 +7,7 @@ if (!isset($_SESSION['EMAIL'])) {
     $_SESSION['profile_image']="";
 }
 $EMAILADMIN=$_SESSION['EMAIL'];
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
