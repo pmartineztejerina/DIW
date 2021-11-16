@@ -168,6 +168,10 @@ if ($ENCUENTRAERROR == 1) {
       } else {
         //¿QUE HACER SI ESTA BLOQUEADO?
         echo "ha entrado en usuario bloqueado";
+        include 'desconexion.php';
+        $url = "login.php";
+        header("Location: " . $url);
+        exit();
       }
     
   } else {

@@ -54,7 +54,7 @@ if (!isset($_SESSION['EMAIL'])){
                 </ul>
                 <span class="navbar-text actions"> 
                     <a class="login" href="login.php">Log In</a>
-                    <a class="btn btn-light action-button" role="button" href="index.php">Sign Up</a>
+                    <a class="btn btn-primary action-button" role="button" href="index.php">Sign Up</a>
                 </span>
             </div>
         </div>

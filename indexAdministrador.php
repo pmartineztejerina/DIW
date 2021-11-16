@@ -3,7 +3,9 @@ session_start();
 if (!isset($_SESSION['EMAIL'])) {
     $_SESSION['EMAIL'] = "";
     $_SESSION['user_id']="";
+    $_SESSION['PERFIL'] ="";
 }
+$EMAILADMIN=$_SESSION['EMAIL'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -47,9 +49,7 @@ if (!isset($_SESSION['EMAIL'])) {
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="">Administracion </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="añadirUsuario.php">Añadir usuario</a>
-                                <a class="dropdown-item" href="#">Borrar usuario</a>
-                                <a class="dropdown-item" href="#">Modificar usuario</a>
-                                <a class="dropdown-item" href="consultaUsuario.php">Consulta usuarios</a>
+                                <a class="dropdown-item" href="gestionUsuarios.php">Gestion usuarios</a>
                                <!--  <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Localizacion</a> -->
                             </div>
@@ -60,7 +60,7 @@ if (!isset($_SESSION['EMAIL'])) {
                     </ul>
                     <span class="navbar-text actions">
                         <a class="login" href="login.php">Log In</a>
-                        <a class="btn btn-light action-button" role="button" href="index.php">Sign Up</a>
+                        <a class="btn btn-primary action-button" role="button" href="index.php">Sign Up</a>
                     </span>
                 </div>
             </div>
@@ -86,7 +86,7 @@ if (!isset($_SESSION['EMAIL'])) {
                 </form>
             </div>
         </div>
-    </section>
+</section>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
