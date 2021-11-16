@@ -33,8 +33,7 @@ if (!isset($_SESSION['EMAIL'])){
                     <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="">Administracion </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="añadirUsuario.php">Añadir usuario</a>
-                            <a class="dropdown-item" href="#">Borrar usuario</a>
-                            <a class="dropdown-item" href="#">Modificar usuario</a>
+                            <a class="dropdown-item" href="gestionUsuarios.php">Gestion usuarios</a>
                             <a class="dropdown-item" href="consultaUsuario.php">Consulta usuarios</a>
                             <!-- <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Localizacion</a> -->
