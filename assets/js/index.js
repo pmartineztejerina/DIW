@@ -27,7 +27,7 @@ function initMap() {
           };
 
           infoWindow.setPosition(pos);
-          infoWindow.setContent("C.D.P. Jose Cabrera");
+          infoWindow.setContent("Aquí estás tú");
           infoWindow.open(map);
           map.setCenter(pos);
         },
