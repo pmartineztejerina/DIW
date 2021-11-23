@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>LOG IN</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/Header-Blue.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+      .mapa {
+        height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+    color:#2c7ff9;
+    text-align: center;
+      }
+    </style>
+    <script src="assets/js/index.js"></script>
+</head>
+
+<body>
+    <section class="login-dark">
+        <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+            <div class="container"><a class="navbar-brand" href="#">FORMULARIO REGISTRO DIW</a>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="navbar-nav me-auto"></ul>
+                    <span class="navbar-text actions"> 
+                      <a class="login" href="login.php">Log In</a>
+                      <a class="btn btn-light action-button" role="button" href="signUp.php">Sign Up</a>
+                    </span>
+                </div>
+            </div>
+        </nav>
+        
+            
+            <div class="illustration">
+              <p>PROYECTO DIW</p>
+              <h2 class="visually">Aplicacion de lo que vamos aprendiendo en la asignatura</h2>
+            </div>
+            <div class="container">
+            <div class="mapa" id="map">
+              <h3>Mi Google Maps Api</h3>
+                <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABT2q4eMXmdc_cozmKVGE22ScaZXZb7OE&callback=initMap&libraries=&v=weekly" async></script>
+            </div>
+          </div>
+        
+    </section>
+    
+    
+</body>
+</html>

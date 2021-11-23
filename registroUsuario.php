@@ -22,7 +22,7 @@ session_start();
         <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
             <div class="container"><a class="navbar-brand" href="#">FORMULARIO REGISTRO DIW</a>
                 <div class="collapse navbar-collapse" id="navcol-1">
-                    <ul class="navbar-nav me-auto"></ul><span class="navbar-text actions"> <a class="login" href="login.php">Log In</a><a class="btn btn-light action-button" role="button" href="#">Sign Up</a></span>
+                    <ul class="navbar-nav me-auto"></ul><span class="navbar-text actions"> <a class="login" href="login.php">Log In</a><a class="btn btn-light action-button" role="button" href="signUp.php">Sign Up</a></span>
                 </div>
             </div>
         </nav>
