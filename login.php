@@ -25,8 +25,9 @@ $_SESSION['USUARIOBLOQUEADO']="visibility: hidden";
     <section class="login-dark">
         <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
             <div class="container"><a class="navbar-brand" href="#">FORMULARIO REGISTRO DIW</a>
+            <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
                 <div class="collapse navbar-collapse" id="navcol-1">
-                    <ul class="navbar-nav me-auto"></ul>
+                    <ul class="navbar-nav me-auto"></ul> 
                     <span class="navbar-text actions"> 
                       <a class="login" href="login.php">Log In</a>
                       <a class="btn btn-light action-button" role="button" href="signUp.php">Sign Up</a>

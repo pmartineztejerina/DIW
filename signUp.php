@@ -24,6 +24,7 @@ session_start();
     <section class="login-dark">
         <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
             <div class="container"><a class="navbar-brand" href="#">FORMULARIO REGISTRO DIW</a>
+            <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav me-auto"></ul>
                     <span class="navbar-text actions"> 
