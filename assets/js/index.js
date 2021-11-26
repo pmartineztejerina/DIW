@@ -3,6 +3,7 @@
 // failed.", it means you probably did not give permission for the browser to
 // locate you.
 let map, infoWindow;
+let marker;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -26,10 +27,10 @@ function initMap() {
             lng: position.coords.longitude,
           };
 
-          infoWindow.setPosition(pos);
+         /*  infoWindow.setPosition(pos);
           infoWindow.setContent("Aquí estás tú");
           infoWindow.open(map);
-          map.setCenter(pos);
+          map.setCenter(pos); */
         },
         () => {
           handleLocationError(true, infoWindow, map.getCenter());
@@ -40,6 +41,14 @@ function initMap() {
       handleLocationError(false, infoWindow, map.getCenter());
     }
   });
+  marker = new google.maps.Marker({
+    map,
+    draggable: true,
+    animation: google.maps.Animation.DROP,
+    position: { lat: 59.327, lng: 18.067 },
+  });
+  marker.addListener("click", toggleBounce);
+
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -51,5 +60,10 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   );
   infoWindow.open(map);
 }
-
-  
+function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}  
