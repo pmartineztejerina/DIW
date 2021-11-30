@@ -95,17 +95,6 @@
 
       $image = "assets/img/Zaragoza.JPG";
       $arr = get_image_location($image);
-      //thumbnail
-      exif_thumbnail(
-        string $filename,
-        int &$width = ?,
-        int &$height = ?,
-        int &$imagetype = ?
-    ): string
-
-
-
-
      ?>
      <script type="text/javascript">
        let lat = <?php echo $arr['latitude'] ?>;
@@ -128,7 +117,7 @@
 
          const locationButton = document.createElement("button");
 
-         locationButton.textContent = "Mi ubicacion";
+         locationButton.textContent = "¿Donde estas?";
          locationButton.classList.add("custom-map-control-button");
          map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
          locationButton.addEventListener("click", () => {
@@ -142,7 +131,7 @@
                  };
 
                  infoWindow.setPosition(pos);
-                 infoWindow.setContent("Estas aqui.");
+                 infoWindow.setContent("¡¡Estas aqui!!");
                  infoWindow.open(map);
                  map.setCenter(pos);
                },
