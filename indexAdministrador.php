@@ -24,11 +24,7 @@ $EMAILADMIN=$_SESSION['EMAIL'];
     <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 <style>
-            .lapiz {
-            position: absolute;
-            top: 10px;
-            left: 140px;
-        }
+
         .cajafoto {
             overflow: hidden;
             margin: 0 auto;

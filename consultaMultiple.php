@@ -92,20 +92,21 @@ $EMAILADMIN = $_SESSION['EMAIL'];
 
                     $sql = 'SELECT * FROM usuarios';
                     $CLAUSES= array();
-                    $COLUMN1=$EMAIL;
-                    $COLUMN2=$PROVINCIA;
-                    $COLUMN3=$NIF;
-                    if ( isset($COLUMN1) ) {
-                        $CLAUSES[] = '(Usuario_email = "'.$COLUMN1.'")';
+                    
+                    if ( strlen ($COLUMN1)!=0 ) {
+                        $COLUMN1="%".$EMAIL."%";
+                        $CLAUSES[] = '(Usuario_email LIKE "'.$COLUMN1.'")';
                     }
-                    if ( isset($COLUMN2) ) {
-                        $CLAUSES[] = '(Usuario_provincia = "'.$COLUMN2.'")';
+                    if ( strlen ($COLUMN2)!=0 ) {
+                        $COLUMN2="%".$PROVINCIA."%";
+                        $CLAUSES[] = '(Usuario_provincia LIKE "'.$COLUMN2.'")';
                     }
-                    if ( isset($COLUMN3) ) {
-                        $CLAUSES[] = '(Usuario_nif = "'.$COLUMN3.'")';
+                    if ( strlen ($COLUMN3)!=0 ) {
+                        $COLUMN3="%".$NIF."%";
+                        $CLAUSES[] = '(Usuario_nif LIKE "'.$COLUMN3.'")';
                     } 
                     if ( count($CLAUSES) > 0 ) {
-                        $sql .= ' WHERE '.implode(' OR ', $CLAUSES).';';
+                        $sql .= ' WHERE '.implode(' AND ', $CLAUSES).';';
                     }
 
                     $results = $conn->query($sql);

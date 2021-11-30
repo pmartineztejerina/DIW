@@ -22,6 +22,16 @@
       }
     </style>
   <!--   <script src="assets/js/index.js"></script> -->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-213815123-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-213815123-1');
+</script>
 </head>
 
 <body>
@@ -85,6 +95,17 @@
 
       $image = "assets/img/Zaragoza.JPG";
       $arr = get_image_location($image);
+      //thumbnail
+      exif_thumbnail(
+        string $filename,
+        int &$width = ?,
+        int &$height = ?,
+        int &$imagetype = ?
+    ): string
+
+
+
+
      ?>
      <script type="text/javascript">
        let lat = <?php echo $arr['latitude'] ?>;
